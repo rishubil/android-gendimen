@@ -128,13 +128,16 @@ def run(dimens):
                 expr = "%s = %s" % (left, expr)
 
             addEdge(gp, expr)
-
             runExpr(expr, dimens)
             expr = None
         else:
             expr = getExprFromComment(element)
             if not expr:
                 continue
+            if "=" in expr:
+                addEdge(gp, expr)
+                runExpr(expr, dimens)
+                expr = None
 
     if '__builtins__' in dimens:
         del dimens['__builtins__']
