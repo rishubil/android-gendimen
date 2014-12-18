@@ -1,7 +1,11 @@
 android-gendimen
 ================
 
-Android의 dimen.xml 작성을 도와주는 간단한 도구입니다.
+Android에서 서로 관계있는 dimen의 값을 일일히 java 코드에서 지정하여 사용하는 것은 귀찮습니다.  
+특히 아주 단순한 관계 - 예를 들면 height는 width의 2배라던가 하는 관계는 쓸데없이 코드를 복잡하게 만듭니다.  
+그렇다면 dimen.xml에 미리 dimen간의 관계를 정의해놓으면 어떨까요?
+
+android-gendimen은 dimen.xml 파일의 주석에 지정한 expresion을 분석하여 알아서 dimen값을 계산해주는 간단한 python 스크립트입니다.
 
 ## Quick start
 
@@ -58,10 +62,6 @@ Android의 dimen.xml 작성을 도와주는 간단한 도구입니다.
 
 ``` xml
 <dimen name="margin_small">8dp</dimen>
-
-<!-- {{ margin_large = margin_small * 2 }} -->
-<dimen name="margin_large">0dp</dimen>
-```
 
 <!-- {{ margin_large = margin_small * 2 }} -->
 <dimen name="margin_large">0dp</dimen>
