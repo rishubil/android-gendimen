@@ -76,7 +76,7 @@ android-gendimen은 dimen.xml 파일의 주석에 지정한 expresion을 분석�
 <dimen name="margin_large">0dp</dimen>
 ```
 
-반대로, 좌측 표현식과 등호를 포함한다면 반드시 expr이 해당 dimen tag의 바로 위가 아닌 문서의 어느 위치에 존재해도 괜찮습니다.
+반대로, 좌측 표현식과 등호를 포함한다면 expr이 해당 dimen tag의 바로 위가 아닌 문서의 어느 위치에 존재해도 괜찮습니다.
 
 ``` xml
 <!-- {{ margin_large = margin_small * 2 }} -->
