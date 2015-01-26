@@ -104,10 +104,14 @@ def addEdge(gp, expr):
     rights = []
 
     for dimen in dimens.keys():
-        if dimen in left_expr:
-            lefts.append(dimen)
-        if dimen in right_expr:
-            rights.append(dimen)
+        exprs = splitToken(left_expr)
+        for ex in exprs:
+            if dimen == ex:
+                lefts.append(dimen)
+        exprs = splitToken(right_expr)
+        for ex in exprs:
+            if dimen == ex:
+                rights.append(dimen)
 
     for left in lefts:
         for right in rights:
@@ -148,16 +152,39 @@ def run(dimens):
         sys.exit(-1)
 
 
+def splitToken(string):
+    token = "1234567890_abcdefghijklnmopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ"
+    ss = []
+    x = ""
+    for c in string:
+        if c in token:
+            x += c
+        else:
+            if x:
+                ss.append(x)
+                x = ""
+            ss.append(c)
+    if x:
+        ss.append(x)
+    return ss
+
+
 def runExpr(expr, dimens):
     unit = None
-    for dimen in dimens.keys():
-        if dimen in expr:
-            if unit and unit != dimens[dimen]['unit']:
-                sys.stderr.write("[!] Unit mismatched: %s" % expr)
-                sys.exit(-1)
-            unit = dimens[dimen]['unit']
-            expr = expr.replace(dimen, "%s['size']" % dimen)
-    exec expr in dimens
+    newExpr = ""
+    exprs = splitToken(expr)
+    for ex in exprs:
+        for dimen in dimens.keys():
+            if dimen == ex:
+                if unit and unit != dimens[dimen]['unit']:
+                    sys.stderr.write("[!] Unit mismatched: %s" % ex)
+                    sys.exit(-1)
+                unit = dimens[dimen]['unit']
+                ex = ex.replace(dimen, "%s['size']" % dimen)
+        newExpr += ex
+    # print expr
+    # print newExpr
+    exec newExpr in dimens
 
 
 if __name__ == "__main__":
