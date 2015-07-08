@@ -11,7 +11,7 @@ allowed_float_error = 1e-08
 
 
 class Dimension(object):
-    parsable_unit = ('px', 'in', 'mm', 'pt', 'dp', 'sp')
+    parsable_unit = ('', 'px', 'in', 'mm', 'pt', 'dp', 'sp')
     parse_regex = re.compile(r"(\d*\.?\d*)(\w*)")
 
     dimensions = dict()
@@ -62,16 +62,21 @@ class Dimension(object):
         :return: parsed Dimension object
         :rtype: Dimension
         """
+        if value_string is None:
+            value_string = ""
         value_string = value_string.strip()
         m = Dimension.parse_regex.match(value_string)
         if m:
             value = m.group(1)
             unit = m.group(2)
 
-            if '.' in value:
-                value = float(value)
+            if value:
+                if '.' in value:
+                    value = float(value)
+                else:
+                    value = int(value)
             else:
-                value = int(value)
+                value = 0
 
             return Dimension(name, value, unit)
 
@@ -102,8 +107,8 @@ class Dimension(object):
 
 class Expression(object):
     substitution_operator = "<="
-    sign_begin = "{{"
-    sign_end = "}}"
+    sign_begin = "{\*"
+    sign_end = "\*}"
     parse_regex = re.compile(sign_begin + r"(.*)" + sign_end)
     tokenable_chars = "1234567890_abcdefghijklnmopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ"
 
@@ -126,19 +131,28 @@ class Expression(object):
             self.left = None
             self.right = expression_string
 
-    def run_expression(self):
-        """Run the expression"""
+    def run_expression(self, force):
+        """Run the expression
+
+        :param force: ignore warning
+        :type force: bool
+        """
         left_dimension = Dimension.dimensions[self.left]
         runnable_string = ""
         for token in self.right_tokens:
             if type(token) == Dimension:
+                if left_dimension.unit == '':
+                    left_dimension.unit = token.unit
                 if token.unit != left_dimension.unit:
                     print("[!] Unit mismatched: %s" % self.expression_string, file=sys.stderr)
-                    sys.exit(-1)
+                    if not force:
+                        sys.exit(-1)
                 runnable_string += unicode(token.value)
             else:
                 runnable_string += unicode(token)
         left_dimension.value = eval(runnable_string)
+        assert type(left_dimension.value) == int or type(left_dimension.value) == float, \
+            "result of expression must be int or float: %s" % self.expression_string
 
     @staticmethod
     def parse(element):
@@ -256,7 +270,7 @@ def save_xml(et, filename):
     :param filename: filename to save
     :type filename: unicode
     """
-    new_xml = etree.tostring(et, pretty_print=True)
+    new_xml = etree.tostring(et, encoding="utf-8", pretty_print=True)
     dimension_xml = open(filename, 'w')
     dimension_xml.write(new_xml)
     dimension_xml.close()
@@ -313,11 +327,13 @@ def confirm(changes_string, yes):
         sys.exit(0)
 
 
-def calculate(et):
+def calculate(et, force):
     """Calculate new dimensions
 
     :param et: ElementTree to set
     :type et: etree.ElementTree
+    :param force: ignore warning
+    :type force: bool
     """
     expression = None
     Expression.add_dependency_node()
@@ -330,7 +346,7 @@ def calculate(et):
                 continue
             if expression.left is not None:
                 Expression.add_dependency_edge(expression)
-                expression.run_expression()
+                expression.run_expression(force)
                 expression = None
         else:
             if element.tag is etree.Comment:
@@ -339,24 +355,21 @@ def calculate(et):
                 expression.left = element.attrib['name']
 
             Expression.add_dependency_edge(expression)
-            expression.run_expression()
+            expression.run_expression(force)
             expression = None
-
-    if '__builtins__' in Dimension.dimensions:
-        del Dimension.dimensions['__builtins__']
-
-    Expression.check_cycle()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("filename", help="Filename of dimens.xml")
     parser.add_argument("-y", "--yes", help="Reply 'Y' for all interactions", action="store_true")
+    parser.add_argument("-f", "--force", help="Ignore all warnings", action="store_true")
     args = parser.parse_args()
 
     xml = read_xml(args.filename)
     parse_dimensions(xml)
-    calculate(xml)
+    calculate(xml, args.force)
+    Expression.check_cycle()
     confirm(Dimension.get_changes(), args.yes)
     set_dimensions(xml)
     save_xml(xml, args.filename)
