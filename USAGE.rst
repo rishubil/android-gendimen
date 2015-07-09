@@ -9,11 +9,11 @@
 	<!-- {* margin_small * 2 *} -->
 	<dimen name="margin_large">0dp</dimen><!-- 결과: 16dp -->
 
-gendimen에서는 대입 연산자로서 ``<=``를 사용합니다. 만약 해당 표현식이 적용될
+gendimen에서는 대입 연산자로서 ``<=`` 를 사용합니다. 만약 해당 표현식이 적용될
 dimen tag의 바로 윗줄에 작성되어 있다면 대입 연산자와 값을 대입할 dimen tag의 name을
 생략해서 사용할 수 있습니다.
 
-반대로, 값을 대입할 dimen tag의 name과 대입 연산자 ``<=``를 포함한다면 표현식이 해당
+반대로, 값을 대입할 dimen tag의 name과 대입 연산자 ``<=`` 를 포함한다면 표현식이 해당
 dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮습니다.
 
 .. code-block:: xml
@@ -27,7 +27,7 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 단위를 지정해줍니다. 그러나, 두 개 이상의 서로 다른 단위를 가지는 dimen tag를 참조할
 경우, 오류가 발생합니다.
 
-만약 -f 또는 --force 옵션을 사용하여 실행한 경우 해당 오류가 발생하더라도 무시하고 단위를
+만약 ``-f`` 또는 ``--force`` 옵션을 사용하여 실행한 경우 해당 오류가 발생하더라도 무시하고 단위를
 지정합니다. 이 때, 새 dimen tag에 적용되는 단위는 표현식에서 가장 마지막에 있는 표현식의
 단위를 따릅니다.
 
@@ -58,7 +58,9 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 	<!-- {* sum(x for x in range(20) if x % 3 == 1) *} -->
 	<dimen name="something_interesting">dp</dimen><!-- 결과: 70dp -->
 
-## 주의사항
+주의사항
+----
+
 *	서로 다른 단위끼리는 연산할 수 없습니다.
 
 	.. code-block:: xml
@@ -69,7 +71,7 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 		<!-- {* text_size + padding *} : ERROR! -->
 		<dimen name="new_dimen">8dp</dimen>
 
-	단, gendimen.py를 실행할 때, command line option으로 -f 또는 --force 옵션을
+	단, gendimen.py를 실행할 때, command line option으로 ``-f`` 또는 ``--force`` 옵션을
 	추가한 경우 경고는 출력되지만 무시하고 덮어 쓸 수 있습니다.
 
 	또, 해당 dimen tag에 단위가 존재하지 않을 경우, 단위가 존재하는 dimen tag의 값을
@@ -102,7 +104,7 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 		<dimen name="margin_large">0dp</dimen>
 
 
-*	정수 몫을 구할 때에는 `//` 연산자를, 실수 나눗셈에는 `/` 연산자를 사용합니다.
+*	정수 몫을 구할 때에는 ``//`` 연산자를, 실수 나눗셈에는 ``/`` 연산자를 사용합니다.
 
 	.. code-block:: xml
 
@@ -114,10 +116,10 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 
 Command line options
 --------------------
-*	-y, --yes
+*	``-y`` , ``--yes``
 
 	수정사항 적용 여부를 묻지 않고 바로 적용합니다.
 
-*	-f, --force
+*	``-f`` , ``--force``
 
 	서로 다른 단위끼리 연산할 경우에 오류를 무시하고 값을 대입합니다.

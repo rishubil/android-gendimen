@@ -123,11 +123,11 @@ Quick start
     <!-- {* margin_small * 2 *} -->
     <dimen name="margin_large">0dp</dimen><!-- 결과: 16dp -->
 
-android-gendimen에서는 대입 연산자로서 ``<=``를 사용합니다. 만약 해당 표현식이 적용될
+android-gendimen에서는 대입 연산자로서 ``<=`` 를 사용합니다. 만약 해당 표현식이 적용될
 dimen tag의 바로 윗줄에 작성되어 있다면 대입 연산자와 값을 대입할 dimen tag의 name을
 생략해서 사용할 수 있습니다.
 
-반대로, 값을 대입할 dimen tag의 name과 대입 연산자 ``<=``를 포함한다면 표현식이 해당
+반대로, 값을 대입할 dimen tag의 name과 대입 연산자 ``<=`` 를 포함한다면 표현식이 해당
 dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮습니다.
 
 .. code-block:: xml
@@ -136,4 +136,4 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_large">0dp</dimen><!-- 결과: 16dp -->
 
-더 자세한 사용 방법은 `USAGE.rst<https://github.com/rishubil/android_gendimen/USAGE.rst>`_를 참조하세요.
+더 자세한 사용 방법은 `USAGE.rst <https://github.com/rishubil/android_gendimen/blob/master/USAGE.rst>`_ 를 참조하세요.
