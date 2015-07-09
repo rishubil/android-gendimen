@@ -143,3 +143,28 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
     <dimen name="margin_large">0dp</dimen><!-- 결과: 16dp -->
 
 더 자세한 사용 방법은 `USAGE.rst <https://github.com/rishubil/android_gendimen/blob/master/USAGE.rst>`_ 를 참조하세요.
+
+팁
+--
+
+Gradle을 사용하는 경우, 매번 build하기 전에 gendimen이 실행되도록 모듈의 ``build.gradle`` 파일 끝에 다음과 같이 지정할 수 있습니다.
+
+.. code-block:: gradle
+
+    task genDimen(type: Exec) {
+        workingDir '../<module name>/src/main/res/'
+        commandLine '<path of gendimen>', 'values/dimens.xml', '-y'
+    }
+    
+    preBuild.dependsOn genDimen
+    
+*예시*
+
+.. code-block:: gradle
+
+    task genDimen(type: Exec) {
+        workingDir '../app/src/main/res/'
+        commandLine '/usr/local/bin/gendimen', 'values/dimens.xml', '-y'
+    }
+    
+    preBuild.dependsOn genDimen
