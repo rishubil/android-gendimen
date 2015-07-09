@@ -11,7 +11,7 @@ setup(name='android-gendimen',
       description='A simple tool for android dimens.xml',
       long_description='You can generate dimen tag for android by defining python expressions in xml comment.',
       keywords='android generator xml dimen dimension',
-      url='http://github.com/rishubil/android_gendimen',
+      url='http://github.com/rishubil/android-gendimen',
       classifiers=[
           'Development Status :: 4 - Beta',
           'License :: OSI Approved :: Apache Software License',

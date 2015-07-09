@@ -8,7 +8,7 @@ Android에서 서로 관계있는 dimen의 값을 일일히 java 코드에서 �
 
 그럼 dimens.xml에 dimen tag간의 관계를 정의해놓을 수 있다면 어떨까요?
 
-android-gendimen은 dimens.xml 파일의 주석에 지정한 expresion을 분석하여 알아서
+android-gendimen은 dimens.xml 파일의 주석에 지정한 expression을 분석하여 알아서
 dimen값을 계산해주는 간단한 python 스크립트입니다.
 
 설치
