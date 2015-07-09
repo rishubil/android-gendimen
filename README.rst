@@ -11,6 +11,13 @@ Android에서 서로 관계있는 dimen의 값을 일일히 java 코드에서 �
 android-gendimen은 dimens.xml 파일의 주석에 지정한 expresion을 분석하여 알아서
 dimen값을 계산해주는 간단한 python 스크립트입니다.
 
+설치
+----
+
+.. code-block:: bash
+
+    $ pip install android-gendimen
+
 Quick start
 -----------
 
@@ -110,9 +117,8 @@ Quick start
         <dimen name="you_can_do_everything_what_you_want">123dp</dimen>
     </resources>
 
-
 사용방법
-----
+--------
 
 기본적인 사용법은 주석 사이에 ``{* expr *}`` 와 같은 표현식을 삽입하여 동작합니다.
 

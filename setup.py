@@ -6,7 +6,7 @@ def readme():
         return f.read()
 
 
-setup(name='Android - gendimen',
+setup(name='android-gendimen',
       version='0.1',
       description='A simple tool for android dimens.xml',
       long_description='You can generate dimen tag for android by defining python expressions in xml comment.',
