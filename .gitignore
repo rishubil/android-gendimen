@@ -55,4 +55,5 @@ target/
 
 # Pyenv autoenv
 .env
+
 .idea/

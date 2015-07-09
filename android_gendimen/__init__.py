@@ -359,7 +359,7 @@ def calculate(et, force):
             expression = None
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("filename", help="Filename of dimens.xml")
     parser.add_argument("-y", "--yes", help="Reply 'Y' for all interactions", action="store_true")
