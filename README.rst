@@ -1,4 +1,4 @@
-Android - gendimen
+android-gendimen
 ==================
 
 Android에서 서로 관계있는 dimen의 값을 일일히 java 코드에서 지정하여 사용하는 것은

@@ -21,13 +21,13 @@ setup(name='android-gendimen',
       author='Nesswit',
       author_email='rishubil@gmail.com',
       license='Apache License 2.0',
-      packages=['android_gendimen'],
+      packages=['gendimen'],
       install_requires=[
           'lxml',
           'python-graph-core'
       ],
       entry_points={
-          'console_scripts': ['gendimen=android_gendimen:main'],
+          'console_scripts': ['gendimen=gendimen:main'],
       },
       include_package_data=True,
       zip_safe=False)
