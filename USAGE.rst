@@ -84,11 +84,11 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 
 	.. code-block:: xml
 
-		<!-- {* foo = bar + fuz *} : ERROR! -->
+		<!-- {* foo <= bar + fuz *} : ERROR! -->
 		<dimen name="foo">4dp</dimen>
-		<!-- {* bar = fuz *} : ERROR! -->
+		<!-- {* bar <= fuz *} : ERROR! -->
 		<dimen name="bar">8dp</dimen>
-		<!-- {* fuz = foo *} : ERROR! -->
+		<!-- {* fuz <= foo *} : ERROR! -->
 		<dimen name="fuz">6dp</dimen>
 
 
@@ -100,7 +100,7 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 
 		<dimen name="margin_small">8dp</dimen>
 	
-		<!-- {* margin_small * 2 *}  {* it = doesn't + matter *} -->
+		<!-- {* margin_small * 2 *}  {* it <= doesn't + matter *} -->
 		<dimen name="margin_large">0dp</dimen>
 
 
