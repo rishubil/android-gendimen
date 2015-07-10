@@ -23,7 +23,7 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 	<dimen name="margin_large">0dp</dimen><!-- 결과: 16dp -->
 
 새로운 관계를 가지는 dimen tag를 추가하고 싶다면, 해당 dimen tag의 값을 비워둔 채
-작성한 후 gendimen.py를 실행하면, 참조하는 dimen tag의 단위와 동일하게 새 dimen tag의
+작성한 후 gendimen을 실행하면, 참조하는 dimen tag의 단위와 동일하게 새 dimen tag의
 단위를 지정해줍니다. 그러나, 두 개 이상의 서로 다른 단위를 가지는 dimen tag를 참조할
 경우, 오류가 발생합니다.
 
@@ -71,7 +71,7 @@ dimen tag의 바로 윗줄 아닌 문서의 어느 위치에 존재해도 괜찮
 		<!-- {* text_size + padding *} : ERROR! -->
 		<dimen name="new_dimen">8dp</dimen>
 
-	단, gendimen.py를 실행할 때, command line option으로 ``-f`` 또는 ``--force`` 옵션을
+	단, gendimen을 실행할 때, command line option으로 ``-f`` 또는 ``--force`` 옵션을
 	추가한 경우 경고는 출력되지만 무시하고 덮어 쓸 수 있습니다.
 
 	또, 해당 dimen tag에 단위가 존재하지 않을 경우, 단위가 존재하는 dimen tag의 값을
