@@ -71,7 +71,7 @@ Quick start
         <dimen name="you_can_do_everything_what_you_want">dp</dimen>
     </resources>
 
-2. gendimen.py 실행
+2. gendimen 실행
 
 .. code-block:: bash
 
