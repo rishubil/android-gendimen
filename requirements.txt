@@ -1,2 +1,2 @@
-lxml==3.4.1
+lxml==4.6.5
 python-graph-core==1.8.2
